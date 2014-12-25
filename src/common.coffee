@@ -26,18 +26,12 @@ getType = (s) ->
         'object'
 
 
-getClass = (s) ->
-    type = getType(s)
-    "#{type[0].toUpperCase()}#{type.substr(1)}Field"
-
-
 module.exports =
     isArray: Array.isArray
     isObject: (x) -> x.toString() is '[object Object]'
     print: console.log.bind console
     getDefaultInstance: getDefaultInstance
-    getType: getDefaultInstance
-    getClass: getClass
+    getType: getType
     dict: (items) -> new ->
         @[k] = v for [k, v] in items
         @

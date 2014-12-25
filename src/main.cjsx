@@ -1,5 +1,5 @@
 React = require('react')
-ObjectField = require('./fields/object.cjsx').ObjectField
+Form = require('./form.cjsx').Form
 
 schema =
     required: ['b']
@@ -17,15 +17,6 @@ schema =
 global.window.instance =
     main1: true
 
-proxy =
-    get: -> global.window.instance
-    set: (v) -> global.window.instance = v
 
-comp = <ObjectField schema=schema proxy=proxy />
-React.render comp, document.querySelector 'body'
-
-
-#    Form: c.C
-#        render: ->
-#            schema = @props.schema
-#            c.E getClass(schema), {schema: schema, instance: @props.instance or getDefaultInstance(schema)}
+comp = <Form schema=schema instance=global.window.instance />
+global.window.rndr = React.render comp, document.querySelector 'body'

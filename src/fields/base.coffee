@@ -1,7 +1,15 @@
 c = require('../common.coffee')
 
+registry = {}
+
 module.exports =
     BaseField:
+        registerClass: (t, c) ->
+            registry[t] = c
+
+        getClass: (s) ->
+            registry[c.getType(s)]
+
         componentWillMount: ->
             instance = @props.proxy.get()
             if instance is undefined
