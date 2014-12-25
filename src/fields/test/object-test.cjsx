@@ -75,7 +75,7 @@ describe 'Object field', ->
         inputs = TestUtils.scryRenderedDOMComponentsWithTag form, 'input'
         expect(inputs.length).toBe 1
         
-        TestUtils.Simulate.change inputs[0], {target: {checked: true, parentNode: {textContent: 'a'}}}
+        TestUtils.Simulate.change inputs[0], {target: {checked: true, key: 'a'}}
 
         inputs = TestUtils.scryRenderedDOMComponentsWithTag form, 'input'
         expect(inputs.length).toBe 2

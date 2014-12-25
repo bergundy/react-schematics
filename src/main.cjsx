@@ -10,6 +10,12 @@ schema =
         b:
             type: 'boolean'
             default: true
+    patternProperties:
+        '^main\\d+':
+            type: 'boolean'
+
+global.window.instance =
+    main1: true
 
 proxy =
     get: -> global.window.instance

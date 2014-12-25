@@ -1,5 +1,4 @@
 React = require('react/addons')
-update = React.addons.update
 
 c = require('../common.coffee')
 
@@ -53,17 +52,20 @@ module.exports =
             </div>
 
         renderPropertySelection: (key, selected) ->
+            link = @linkExists key, selected
             <label key=key>
-                <input type='checkbox' disabled=@isRequired(key) checked=selected onChange=@onChange />
+                <input type='checkbox' disabled=@isRequired(key) checkedLink=link />
                 {key}
             </label>
 
-        getNewValue: (e) ->
-            key = e.target.parentNode.textContent
-            selected = e.target.checked
-
-            switch
-                when selected
-                    c.dict(([k, v] for k, v of @state.instance).concat([[key, undefined]]))
-                else
-                    c.dict([k, v] for k, v of @state.instance when k isnt key)
+        linkExists: (key, selected) ->
+            value: selected
+            requestChange: (selected) =>
+                instance = switch
+                    when selected
+                        c.dict(([k, v] for k, v of @state.instance).concat([[key, undefined]]))
+                    else
+                        c.dict([k, v] for k, v of @state.instance when k isnt key)
+                @props.proxy.set instance
+                @setState
+                    instance: instance
