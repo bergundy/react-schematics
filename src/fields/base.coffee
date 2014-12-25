@@ -21,8 +21,7 @@ module.exports =
         onChange: (e) ->
             value = @getNewValue e
             @props.proxy.set value
-            @setState
-                instance: value
+            @setState instance: value
 
         createProxy: (k) ->
             get: => @state.instance[k]

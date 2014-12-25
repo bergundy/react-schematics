@@ -13,3 +13,4 @@ BooleanField = React.createClass
         e.target.checked
 
 BaseField.registerClass 'boolean', BooleanField
+module.exports = BooleanField: BooleanField

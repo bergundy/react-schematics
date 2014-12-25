@@ -2,7 +2,7 @@ React = require('react')
 Form = require('./form.cjsx').Form
 
 schema =
-    required: ['b']
+    required: ['b', 'main2']
     properties:
         a:
             type: 'string'

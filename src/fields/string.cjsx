@@ -24,3 +24,4 @@ StringField = React.createClass
         e.target.value
 
 BaseField.registerClass 'string', StringField
+module.exports = StringField: StringField

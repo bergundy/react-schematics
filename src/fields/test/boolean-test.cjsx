@@ -1,5 +1,6 @@
 React = require('react/addons')
 c = require('../../common.coffee')
+require('../../form.cjsx')
 BooleanField = require('../boolean.cjsx').BooleanField
 TestUtils = React.addons.TestUtils
 
