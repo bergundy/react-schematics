@@ -11,10 +11,12 @@ ObjectField = React.createClass
             <div>
                 {@props.label}
                 {@renderPropertySelection(k, @shouldRenderProperty k) for k of @props.schema.properties}
-                {@renderPatternCandidateSelection(k) for k in @getNonPropertiesToRender()}
-                {@renderNewPropertyInput()}
+                {@renderNonPropertySelection(k) for k in @getNonPropertiesToRender()}
+                {@renderAddPropertyInput()}
             </div>
-            {@renderProperty k, v for [k, v] in @getPropertiesToRender()}
+            <div className='property-list'>
+                {@renderProperty k, v for [k, v] in @getPropertiesToRender()}
+            </div>
         </div>
 
     isRequired: (k) ->
@@ -60,23 +62,14 @@ ObjectField = React.createClass
 
     renderPropertySelection: (key, selected) ->
         link = @linkExists key, selected
-        <div key=key>
-            <input type='checkbox' disabled=@isRequired(key) checkedLink=link />
-            {key}
-        </div>
+        <PropertySelection key=key property=key link=link required=@isRequired(key) />
 
-    renderPatternCandidateSelection: (key) ->
+    renderNonPropertySelection: (key) ->
         onClick = => @onPropertiesChanged key, false
-        <div key=key>
-            {key}
-            <input type='button' value='X' disabled=@isRequired(key) onClick=onClick />
-        </div>
+        <NonPropertySelection clickHandler=onClick required=@isRequired(key) property=key key=key />
 
-    renderNewPropertyInput: ->
-        <form onSubmit=@addProperty>
-            <input type='text' valueLink=@linkState('newPropertyKey') />
-            <input type='submit' value='add' />
-        </form>
+    renderAddPropertyInput: ->
+        <AddPropertyInput addProperty=@addProperty link=@linkState('newPropertyKey') />
 
     addProperty: (e) ->
         e.preventDefault()
@@ -103,5 +96,31 @@ ObjectField = React.createClass
         requestChange: (selected) =>
             @onPropertiesChanged key, selected
 
+
+PropertySelection = React.createClass
+    render: ->
+        <div>
+            <input type='checkbox' disabled=@props.required checkedLink=@props.link />
+            {@props.property}
+        </div>
+
+NonPropertySelection = React.createClass
+    render: ->
+        <div>
+            {@props.property}
+            <input type='button' value='X' disabled=@props.required onClick=@props.clickHandler />
+        </div>
+
+AddPropertyInput = React.createClass
+    render: ->
+        <form onSubmit=@props.addProperty>
+            <input type='text' valueLink=@props.link />
+            <input type='submit' value='add' />
+        </form>
+
 BaseField.registerClass 'object', ObjectField
-module.exports = ObjectField: ObjectField
+module.exports =
+    ObjectField: ObjectField
+    PropertySelection: PropertySelection
+    NonPropertySelection: NonPropertySelection
+    AddPropertyInput: AddPropertyInput
