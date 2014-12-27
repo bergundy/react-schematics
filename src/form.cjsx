@@ -3,6 +3,7 @@ BaseField = require('./fields/base.coffee').BaseField
 require('./fields/boolean.cjsx')
 require('./fields/string.cjsx')
 require('./fields/object.cjsx')
+require('./fields/array.cjsx')
 c = require('./common.coffee')
 
 module.exports =

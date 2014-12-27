@@ -10,6 +10,11 @@ schema =
         b:
             type: 'boolean'
             default: true
+        c:
+            type: 'array'
+            items:
+                type: 'string'
+            default: ['a', 'b']
     patternProperties:
         '^main\\d+':
             type: 'boolean'
