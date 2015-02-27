@@ -18,7 +18,9 @@ getDefaultInstance = (s) ->
 
 
 getType = (s) ->
-    if s.type?
+    if 'oneOf' of s
+        'oneOf'
+    else if s.type?
         s.type
     else if s.items?
         'array'

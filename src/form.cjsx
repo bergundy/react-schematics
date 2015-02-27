@@ -4,6 +4,7 @@ require('./fields/boolean.cjsx')
 require('./fields/string.cjsx')
 require('./fields/object.cjsx')
 require('./fields/array.cjsx')
+require('./fields/oneof.cjsx')
 c = require('./common.coffee')
 
 module.exports =

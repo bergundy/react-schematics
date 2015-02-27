@@ -5,8 +5,12 @@ schema =
     required: ['b', 'main2']
     properties:
         a:
-            type: 'string'
-            enum: ['a', 'b', 'c']
+            oneOf: [
+                type: 'string'
+                enum: ['a', 'b', 'c']
+            ,
+                type: 'boolean'
+            ]
         b:
             type: 'boolean'
             default: true
